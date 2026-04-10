@@ -4,7 +4,7 @@
  */
 
 import { Metadata } from 'next'
-import { COMPANY_INFO } from './constants'
+import { COMPANY } from './constants'
 
 interface SeoMetadataProps {
   title?: string
@@ -18,8 +18,8 @@ interface SeoMetadataProps {
   robots?: string
 }
 
-const BASE_DOMAIN = COMPANY_INFO.domain
-const BASE_URL = `https://${BASE_DOMAIN}`
+// COMPANY.domain already includes https://
+const BASE_URL = COMPANY.domain
 
 const DEFAULT_KEYWORDS = [
   'PCS concierge',
@@ -37,14 +37,9 @@ const DEFAULT_KEYWORDS = [
 const DEFAULT_DESCRIPTION =
   'PCS Concierge by United PCS Group LLC provides luxury military relocation services for military families. Expert coordination for moves, housing, schools, and community integration across 300+ installations.'
 
-/**
- * Generate comprehensive metadata for a page
- * @param props - SEO metadata configuration
- * @returns Metadata object compatible with Next.js 14+
- */
 export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
   const {
-    title = `${COMPANY_INFO.name} | Military Relocation Concierge`,
+    title = `${COMPANY.name} | Military Relocation Concierge`,
     description = DEFAULT_DESCRIPTION,
     keywords = DEFAULT_KEYWORDS,
     ogImage = `${BASE_URL}/og-image.jpg`,
@@ -55,13 +50,12 @@ export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
     robots = noindex ? 'noindex, nofollow' : 'index, follow',
   } = props
 
-  const fullTitle = title.includes(COMPANY_INFO.name) ? title : `${title} | ${COMPANY_INFO.name}`
+  const fullTitle = title.includes(COMPANY.name) ? title : `${title} | ${COMPANY.name}`
 
   return {
     title: fullTitle,
     description,
     keywords: typeof keywords === 'string' ? keywords : keywords.join(', '),
-    canonical: canonicalUrl,
     robots: {
       index: !noindex,
       follow: true,
@@ -87,7 +81,7 @@ export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
           type: 'image/jpeg',
         },
       ],
-      siteName: COMPANY_INFO.name,
+      siteName: COMPANY.name,
       locale: 'en_US',
     },
     twitter: {
@@ -100,7 +94,7 @@ export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
     appleWebApp: {
       capable: true,
       statusBarStyle: 'black-translucent',
-      title: COMPANY_INFO.name,
+      title: COMPANY.name,
     },
     formatDetection: {
       telephone: true,
@@ -108,7 +102,7 @@ export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
       address: true,
     },
     other: {
-      'og:site_name': COMPANY_INFO.name,
+      'og:site_name': COMPANY.name,
       'og:type': ogType,
       'twitter:site': '@pcsconcierge',
       'apple-mobile-web-app-capable': 'yes',
@@ -118,9 +112,6 @@ export function generateSeoMetadata(props: SeoMetadataProps = {}): Metadata {
   }
 }
 
-/**
- * Home page metadata
- */
 export const HOME_PAGE_METADATA = generateSeoMetadata({
   title: 'PCS Concierge | Luxury Military Relocation Service',
   description:
@@ -133,9 +124,6 @@ export const HOME_PAGE_METADATA = generateSeoMetadata({
   ],
 })
 
-/**
- * Services page metadata
- */
 export const SERVICES_PAGE_METADATA = generateSeoMetadata({
   title: 'Services | Military Relocation Packages',
   description:
@@ -148,9 +136,6 @@ export const SERVICES_PAGE_METADATA = generateSeoMetadata({
   ],
 })
 
-/**
- * About page metadata
- */
 export const ABOUT_PAGE_METADATA = generateSeoMetadata({
   title: 'About | PCS Concierge Mission & Values',
   description:
@@ -158,9 +143,6 @@ export const ABOUT_PAGE_METADATA = generateSeoMetadata({
   keywords: [...DEFAULT_KEYWORDS, 'about us', 'military family support', 'relocation experts'],
 })
 
-/**
- * Method page metadata
- */
 export const METHOD_PAGE_METADATA = generateSeoMetadata({
   title: 'Our Method | CONCIERGE 9-Step Process',
   description:
@@ -168,9 +150,6 @@ export const METHOD_PAGE_METADATA = generateSeoMetadata({
   keywords: [...DEFAULT_KEYWORDS, 'relocation process', 'military moving process'],
 })
 
-/**
- * Testimonials page metadata
- */
 export const TESTIMONIALS_PAGE_METADATA = generateSeoMetadata({
   title: 'Testimonials | Military Families We Have Served',
   description:
@@ -178,9 +157,6 @@ export const TESTIMONIALS_PAGE_METADATA = generateSeoMetadata({
   keywords: [...DEFAULT_KEYWORDS, 'testimonials', 'military family reviews', 'success stories'],
 })
 
-/**
- * FAQs page metadata
- */
 export const FAQS_PAGE_METADATA = generateSeoMetadata({
   title: 'FAQs | Military Relocation Questions Answered',
   description:
@@ -188,9 +164,6 @@ export const FAQS_PAGE_METADATA = generateSeoMetadata({
   keywords: [...DEFAULT_KEYWORDS, 'FAQ', 'military relocation questions'],
 })
 
-/**
- * Contact page metadata
- */
 export const CONTACT_PAGE_METADATA = generateSeoMetadata({
   title: 'Contact | Get In Touch With PCS Concierge',
   description:
@@ -198,16 +171,12 @@ export const CONTACT_PAGE_METADATA = generateSeoMetadata({
   keywords: [...DEFAULT_KEYWORDS, 'contact us', 'military relocation support'],
 })
 
-/**
- * Generate structured data for Schema.org markup
- * Useful for rich snippets in search results
- */
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: COMPANY_INFO.name,
-    alternateName: COMPANY_INFO.legalName,
+    name: COMPANY.name,
+    alternateName: COMPANY.legal,
     description: DEFAULT_DESCRIPTION,
     url: BASE_URL,
     logo: `${BASE_URL}/logo.png`,
@@ -219,9 +188,9 @@ export function generateOrganizationSchema() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: COMPANY_INFO.phone,
+      telephone: COMPANY.phone,
       contactType: 'Customer Service',
-      email: COMPANY_INFO.email,
+      email: COMPANY.email,
       availableLanguage: 'en',
       areaServed: 'US',
     },
@@ -233,9 +202,6 @@ export function generateOrganizationSchema() {
   }
 }
 
-/**
- * Generate breadcrumb schema for navigation
- */
 export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: string }>) {
   return {
     '@context': 'https://schema.org',
@@ -249,18 +215,15 @@ export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url:
   }
 }
 
-/**
- * Generate service schema for rich snippets
- */
 export function generateServiceSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: COMPANY_INFO.name,
+    name: COMPANY.name,
     description: DEFAULT_DESCRIPTION,
     provider: {
       '@type': 'Organization',
-      name: COMPANY_INFO.legalName,
+      name: COMPANY.legal,
       url: BASE_URL,
     },
     areaServed: {
@@ -270,8 +233,8 @@ export function generateServiceSchema() {
     availableChannel: {
       '@type': 'ServiceChannel',
       serviceUrl: BASE_URL,
-      servicePhone: COMPANY_INFO.phone,
-      serviceEmail: COMPANY_INFO.email,
+      servicePhone: COMPANY.phone,
+      serviceEmail: COMPANY.email,
     },
   }
 }
