@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { HeroSection } from 'A/components/home/HeroSection';
+import { HeroSection } from '@/components/home/HeroSection';
 import { TrustBar } from '@/components/home/TrustBar';
 import { ProblemSection } from '@/components/home/ProblemSection';
 import { SolutionSection } from '@/components/home/SolutionSection';
 import { ServiceTiers } from '@/components/home/ServiceTiers';
 import { ProcessTimeline } from '@/components/home/ProcessTimeline';
 import { TestimonialCarousel } from '@/components/home/TestimonialCarousel';
-import { StatsSection } from 'A/components/home/StatsSection';
+import { StatsSection } from '@/components/home/StatsSection';
 import { FAQSection } from '@/components/home/FAQSection';
-import { CTASection } from 'A/components/home/CTASection';
+import { CTASection } from '@/components/home/CTASection';
 
 export const metadata: Metadata = {
   title: 'PCS Concierge | Luxury Military Relocation Services',

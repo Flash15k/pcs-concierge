@@ -80,7 +80,7 @@ const config: Config = {
         md: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         lg: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         xl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        luxury: '0 20px 40px -10px rgba(0, 0, 0, 0.15')',
+        luxury: '0 20px 40px -10px rgba(0, 0, 0, 0.15)',
       },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-in-out',
@@ -112,7 +112,8 @@ const config: Config = {
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
       },
-      transitionTimingFunction: {\n        luxury: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      transitionTimingFunction: {
+        luxury: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
   },
