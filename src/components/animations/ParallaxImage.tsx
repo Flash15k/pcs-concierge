@@ -90,7 +90,7 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
         />
       </div>
     </div>
-  
- "»
-}
- cyport default ParallaxImage;
+  );
+};
+
+export default ParallaxImage;
