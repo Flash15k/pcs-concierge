@@ -7,7 +7,7 @@ import { SERVICE_PACKAGES } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ServiceTiers() {
+export function ServiceTiers() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
@@ -43,32 +43,23 @@ export default function ServiceTiers() {
   return (
     <section ref={containerRef} className="w-full bg-cream py-24 md:py-32 lg:py-40">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-16">
-          {/* Eyebrow */}
           <div className="mb-4">
             <span className="uppercase tracking-[0.2em] text-xs font-semibold text-gold font-body">
               Service Packages
             </span>
           </div>
-
-          {/* Headline */}
           <h2 className="font-heading text-4xl md:text-5xl text-navy font-bold mb-6">
             Choose Your Level of Support
           </h2>
-
-          {/* Subtitle */}
           <p className="text-slate text-lg font-body max-w-2xl mx-auto">
             Every package lifts the weight of your PCS from your shoulders.
           </p>
         </div>
-
-        {/* Cards Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           {SERVICE_PACKAGES.map((pkg, idx) => {
             const isDark = pkg.dark;
             const isFeatured = pkg.featured;
-
             return (
               <div
                 key={idx}
@@ -79,7 +70,6 @@ export default function ServiceTiers() {
                   isDark ? 'bg-navy text-cream' : 'bg-warm-white text-charcoal'
                 } ${isFeatured ? 'ring-2 ring-gold' : ''}`}
               >
-                {/* Featured Badge */}
                 {isFeatured && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gold text-navy px-4 py-1 text-xs uppercase tracking-[0.15em] font-semibold font-body rounded-full">
@@ -87,15 +77,11 @@ export default function ServiceTiers() {
                     </span>
                   </div>
                 )}
-
-                {/* Tier Label */}
                 <div className="mb-4">
                   <span className="uppercase text-xs tracking-[0.15em] text-gold font-semibold font-body">
                     {pkg.tier}
                   </span>
                 </div>
-
-                {/* Package Name */}
                 <h3
                   className={`font-heading text-2xl font-bold mb-2 ${
                     isDark ? 'text-cream' : 'text-navy'
@@ -103,8 +89,6 @@ export default function ServiceTiers() {
                 >
                   {pkg.name}
                 </h3>
-
-                {/* Price */}
                 <div className="mb-6">
                   <div
                     className={`font-heading text-5xl font-bold ${
@@ -117,11 +101,7 @@ export default function ServiceTiers() {
                     /one-time
                   </p>
                 </div>
-
-                {/* Divider */}
                 <div className={`w-full h-[1px] ${isDark ? 'bg-gold/20' : 'bg-gold/10'} my-6`}></div>
-
-                {/* Features List */}
                 <ul className="mb-8 space-y-3">
                   {pkg.features.map((feature, fidx) => (
                     <li
@@ -130,13 +110,11 @@ export default function ServiceTiers() {
                         isDark ? 'text-cream/80' : 'text-charcoal/80'
                       }`}
                     >
-                      <span className="text-gold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="text-gold flex-shrink-0 mt-0.5">\u2713</span>
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-
-                {/* CTA Button */}
                 <button
                   className={`w-full py-4 font-semibold uppercase tracking-wider text-sm font-body transition-all duration-300 mt-8 ${
                     isDark || isFeatured
