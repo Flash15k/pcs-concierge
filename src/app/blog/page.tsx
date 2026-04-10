@@ -103,7 +103,7 @@ export default function BlogPage() {
                   </p>
                   <div className="mt-6">
                     <span className="text-gold text-xs uppercase tracking-wider font-semibold">
-                      Coming Soon â†’
+                      Coming Soon \u2192
                     </span>
                   </div>
                 </div>
@@ -113,6 +113,5 @@ export default function BlogPage() {
         </div>
       </section>
     </>
-  
- "»
+  );
 }
