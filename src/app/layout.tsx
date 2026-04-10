@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Montserrat } from 'next/font/google';
 import '@/styles/globals.css';
-import Navbar from 'A/components/layout/Navbar';
+import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 const playfair = Playfair_Display({
