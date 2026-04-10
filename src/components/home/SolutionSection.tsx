@@ -6,7 +6,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SolutionSection() {
+export function SolutionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +44,7 @@ export default function SolutionSection() {
     {
       title: 'Vendor Management',
       description:
-        'Cleaning, storage, housing — we coordinate the vendors, you approve the plan.'
+        'Cleaning, storage, housing \u2014 we coordinate the vendors, you approve the plan.'
     },
     {
       title: 'White-Glove Updates',
@@ -57,7 +57,6 @@ export default function SolutionSection() {
       ref={containerRef}
       className="w-full bg-deep-navy py-24 md:py-32 lg:py-40 relative overflow-hidden"
     >
-      {/* Decorative Compass Emblem */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{
@@ -73,48 +72,32 @@ export default function SolutionSection() {
           transform: 'translate(-50%, -50%)'
         }}
       ></div>
-
-      {/* Content */}
       <div ref={contentRef} className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-        {/* Eyebrow */}
         <div className="mb-4">
           <span className="uppercase tracking-[0.2em] text-xs font-semibold text-gold font-body">
             The PCS Concierge Difference
           </span>
         </div>
-
-        {/* Headline */}
         <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-cream font-bold mb-8">
           Military Precision.
           <br />
           Concierge Grace.
         </h2>
-
-        {/* Gold Divider */}
         <div className="w-16 h-[1px] bg-gold mx-auto my-8"></div>
-
-        {/* Body Text */}
         <p className="text-cream/70 text-lg max-w-3xl mx-auto mb-16 font-body">
           PCS Concierge by United PCS Group delivers a premium relocation experience built
           exclusively for military families. We handle the complexity so you can focus on what
           matters most.
         </p>
-
-        {/* Solutions Grid */}
         <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {solutions.map((solution, idx) => (
             <div key={idx} className="text-center">
-              {/* Icon Placeholder */}
               <div className="w-12 h-12 border border-gold/30 mx-auto mb-4 flex items-center justify-center text-gold text-xl">
-                ✦
+                \u2726
               </div>
-
-              {/* Title */}
               <h3 className="text-cream font-heading text-xl font-semibold mb-3">
                 {solution.title}
               </h3>
-
-              {/* Description */}
               <p className="text-cream/60 text-sm font-body">{solution.description}</p>
             </div>
           ))}
