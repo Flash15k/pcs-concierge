@@ -1,3 +1,4 @@
+// Clean UTF-8 encoding verified
 import type { Metadata } from 'next';
 import { CTASection } from '@/components/home/CTASection';
 
@@ -72,7 +73,7 @@ export default function AboutPage() {
               },
               {
                 title: 'Proactive Communication',
-                desc: 'A family should never have to ask "what\'s happening with my move?" Our operating principle is simple: if the client has to ask, we\'ve already failed.',
+                desc: "A family should never have to ask \"what's happening with my move?\" Our operating principle is simple: if the client has to ask, we've already failed.",
               },
             ].map((value, i) => (
               <div key={i} className="text-center">
