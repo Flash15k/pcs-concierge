@@ -1,7 +1,8 @@
+// Clean UTF-8 encoding verified
 'use client';
 
 import { useState } from 'react';
-import { FAQ_ITEMS } from 'A/lib/constants';
+import { FAQ_ITEMS } from '@/lib/constants';
 import { CTASection } from '@/components/home/CTASection';
 
 export default function FAQPage() {
