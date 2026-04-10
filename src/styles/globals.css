@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for brand colors */
+:root {
+  --navy: #1B2A4A;
+  --deep-navy: #0F1A2E;
+  --gold: #C6A65A;
+  --gold-light: #E8D9C3;
+  --gold-dark: #8B7A47;
+  --military-green: #4F5D2F;
+  --cream: #F7F5EF;
+  --warm-white: #FEFDFB;
+  --charcoal: #2C2C2C;
+  --slate: #5A5A5A;
+
+  /* Gradients */
+  --gradient-gold-to-navy: linear-gradient(135deg, var(--gold) 0%, var(--navy) 100%);
+  --gradient-navy-to-deep: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(27, 42, 74, 0.95) 0%, rgba(15, 26, 46, 0.95) 100%);
+}
+
+/* Base element styling */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-cream text-charcoal font-body leading-relaxed;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading font-bold;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  @apply text-5xl md:text-6xl lg:text-7xl leading-tight;
+  font-weight: 700;
+}
+
+h2 {
+  @apply text-4xl md:text-5xl leading-tight;
+  font-weight: 700;
+}
+
+h3 {
+  @apply text-3xl md:text-4xl leading-snug;
+  font-weight: 700;
+}
+
+h4 {
+  @apply text-2xl md:text-3xl leading-snug;
+  font-weight: 600;
+}
+
+h5 {
+  @apply text-xl md:text-2xl;
+  font-weight: 600;
+}
+
+h6 {
+  @apply text-lg md:text-xl;
+  font-weight: 600;
+}
+
+p {
+  @apply text-base md:text-lg leading-relaxed;
+  font-weight: 400;
+}
+
+a {
+  @apply transition-colors duration-300 ease-luxury;
+}
+
+/* Selection colors */
+::selection {
+  @apply bg-navy text-gold;
+}
+
+::-moz-selection {
+  @apply bg-navy text-gold;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cream;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold rounded-full;
+  border: 3px solid var(--cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-dark;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: var(--gold) var(--cream);
+  scrollbar-width: thin;
+}
+
+/* Smooth page transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-cream;
+}
+
+/* Link styling */
+a {
+  @apply text-navy hover:text-gold transition-colors duration-300;
+  text-decoration: none;
+}
+
+/* Button base styles */
+button {
+  @apply font-body font-medium transition-all duration-300 ease-luxury;
+  cursor: pointer;
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+  @apply font-body text-charcoal border border-slate/20 rounded-lg;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  @apply outline-none border-gold ring-1 ring-gold/20;
+}
+
+/* Utility classes for luxury styling */
+@layer components {
+  .text-luxury {
+    @apply font-heading font-bold tracking-luxury;
+    letter-spacing: 0.15em;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-navy to-gold bg-clip-text text-transparent;
+  }
+
+  .shadow-luxury {
+    @apply shadow-luxury;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 md:py-4 bg-navy text-cream font-semibold rounded-lg hover:bg-deep-navy focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 md:py-4 bg-gold text-navy font-semibold rounded-lg hover:bg-gold-dark focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 md:py-4 border-2 border-navy text-navy font-semibold rounded-lg hover:bg-navy hover:text-cream transition-all duration-300;
+  }
+
+  .container-luxury {
+    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .gradient-overlay {
+    position: relative;
+    background: linear-gradient(135deg, rgba(27, 42, 74, 0.95) 0%, rgba(15, 26, 46, 0.95) 100%);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .border-gold-accent {
+    @apply border-b-4 border-gold pb-4;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply text-sm;
+  }
+}

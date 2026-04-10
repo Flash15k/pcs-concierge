@@ -1,0 +1,32 @@
+{
+  "name": "pcs-concierge",
+  "version": "1.0.0",
+  "description": "PCS Concierge by United PCS Group LLC - Luxury Military Relocation Service",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "^14.0.0",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.3.6",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16",
+    "gsap": "^3.12.2",
+    "@gsap/react": "^2.1.1",
+    "lucide-react": "^0.294.0",
+    "react-hook-form": "^7.48.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/node": "^20.10.0",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}
