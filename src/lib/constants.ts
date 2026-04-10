@@ -1,3 +1,4 @@
+// Clean UTF-8 encoding verified
 export const COMPANY = {
   name: 'PCS Concierge',
   legal: 'United PCS Group LLC',
