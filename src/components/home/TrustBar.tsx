@@ -2,7 +2,7 @@
 
 import { BRANCHES } from '@/lib/constants';
 
-export default function TrustBar() {
+export function TrustBar() {
   return (
     <section className="w-full bg-cream border-t border-b border-gold/10 py-8">
       <div className="max-w-6xl mx-auto px-6">
