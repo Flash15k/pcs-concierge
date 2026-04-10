@@ -18,7 +18,7 @@ export default function HowItWorksPage() {
             OUR PROCESS
           </p>
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-cream font-bold mb-6">
-            The C.O.N.C.I.E.R.G.E. Method‚Ñ¢
+            The C.O.N.C.I.E.R.G.E. Method\u2122
           </h1>
           <p className="text-cream/60 text-lg max-w-2xl mx-auto">
             A proven 9-step operating system that transforms PCS chaos into coordinated calm.
@@ -47,15 +47,21 @@ export default function HowItWorksPage() {
               </div>
 
               {/* Content */}
-              <div class="flex-1">
+              <div className="flex-1">
                 <h2 className="font-heading text-2xl md:text-3xl text-navy font-bold mb-4">
                   {step.title}
                 </h2>
-                <p className="text-charcoal-70 text-lg leading-relaxed">
+                <p className="text-charcoal/70 text-lg leading-relaxed">
                   {step.description}
                 </p>
                 <div className="w-12 h-[1px] bg-gold mt-6" />
               </div>
             </div>
-  
-  (›[Y[[ôHù]€ú¬à
+          ))}
+        </div>
+      </section>
+
+      <CTASection />
+    </>
+  );
+}
