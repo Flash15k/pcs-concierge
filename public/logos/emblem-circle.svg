@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer ring -->
+  <circle cx="100" cy="100" r="95" stroke="#C6A65A" stroke-width="2" fill="none" opacity="0.6"/>
+  <circle cx="100" cy="100" r="85" stroke="#C6A65A" stroke-width="0.5" fill="none" opacity="0.3"/>
+
+  <!-- Compass star -->
+  <polygon points="100,18 107,88 100,98 93,88" fill="#C6A65A" opacity="0.8"/>
+  <polygon points="100,182 107,112 100,102 93,112" fill="#C6A65A" opacity="0.8"/>
+  <polygon points="18,100 88,93 98,100 88,107" fill="#C6A65A" opacity="0.8"/>
+  <polygon points="182,100 112,93 102,100 112,107" fill="#C6A65A" opacity="0.8"/>
+
+  <!-- Diagonal compass points -->
+  <polygon points="145,55 108,94 100,98 104,90" fill="#C6A65A" opacity="0.4"/>
+  <polygon points="55,55 92,94 100,98 96,90" fill="#C6A65A" opacity="0.4"/>
+  <polygon points="145,145 108,106 100,102 104,110" fill="#C6A65A" opacity="0.4"/>
+  <polygon points="55,145 92,106 100,102 96,110" fill="#C6A65A" opacity="0.4"/>
+
+  <!-- Center dot -->
+  <circle cx="100" cy="100" r="5" fill="#C6A65A" opacity="0.8"/>
+  <circle cx="100" cy="100" r="2" fill="#1B2A4A"/>
+
+  <!-- Inner text ring path -->
+  <path id="textRing" d="M 100,100 m -60,0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0" fill="none"/>
+  <text font-family="Montserrat, sans-serif" font-size="9" letter-spacing="4" fill="#C6A65A" opacity="0.7">
+    <textPath href="#textRing" startOffset="8%">UNITED PCS GROUP · CONCIERGE ·</textPath>
+  </text>
+</svg>

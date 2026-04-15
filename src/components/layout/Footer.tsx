@@ -1,18 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
+import { COMPANY, NAV_LINKS } from '@/lib/constants';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'How It Works', href: '/how-it-works' },
-    { label: 'About', href: '/about' },
-    { label: 'FAQ', href: '/faq' },
+    ...NAV_LINKS,
     { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
   ];
 
   const branches = [
@@ -81,10 +77,10 @@ const Footer = () => {
                     Phone
                   </p>
                   <a
-                    href="tel:(704)649-2609"
+                    href={`tel:${COMPANY.phoneTel}`}
                     className="text-cream text-sm hover:text-gold transition-colors"
                   >
-                    (704) 649-2609
+                    {COMPANY.phone}
                   </a>
                 </div>
               </div>
@@ -95,10 +91,10 @@ const Footer = () => {
                     Email
                   </p>
                   <a
-                    href="mailto:info@UPCSG.com"
+                    href={`mailto:${COMPANY.email}`}
                     className="text-cream text-sm hover:text-gold transition-colors"
                   >
-                    info@UPCSG.com
+                    {COMPANY.email}
                   </a>
                 </div>
               </div>
@@ -107,9 +103,9 @@ const Footer = () => {
                   Hours
                 </p>
                 <div className="text-cream text-sm space-y-1">
-                  <p>Mon-Fri: 9AM - 6PM</p>
-                  <p>Sat: 10AM - 2PM</p>
-                  <p>Sun: Closed</p>
+                  <p>{COMPANY.hours.weekday}</p>
+                  <p>{COMPANY.hours.saturday}</p>
+                  <p>{COMPANY.hours.sunday}</p>
                 </div>
               </div>
             </div>

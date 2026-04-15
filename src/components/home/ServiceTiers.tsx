@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Check } from 'lucide-react';
 import { SERVICE_PACKAGES } from '@/lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,6 +11,28 @@ gsap.registerPlugin(ScrollTrigger);
 export function ServiceTiers() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
+  async function handleCheckout(packageId: string) {
+    setLoadingId(packageId);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packageId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Something went wrong. Please try again or call us at (704) 649-2609.');
+        setLoadingId(null);
+      }
+    } catch {
+      alert('Something went wrong. Please try again or call us at (704) 649-2609.');
+      setLoadingId(null);
+    }
+  }
 
   useEffect(() => {
     if (!containerRef.current || cardsRef.current.length === 0) return;
@@ -110,19 +133,21 @@ export function ServiceTiers() {
                         isDark ? 'text-cream/80' : 'text-charcoal/80'
                       }`}
                     >
-                      <span className="text-gold flex-shrink-0 mt-0.5">\u2713</span>
+                      <Check size={15} strokeWidth={2.5} className="text-gold flex-shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <button
-                  className={`w-full py-4 font-semibold uppercase tracking-wider text-sm font-body transition-all duration-300 mt-8 ${
+                  onClick={() => handleCheckout(pkg.id)}
+                  disabled={loadingId !== null}
+                  className={`w-full py-4 font-semibold uppercase tracking-wider text-sm font-body transition-all duration-300 mt-8 disabled:opacity-60 disabled:cursor-not-allowed ${
                     isDark || isFeatured
                       ? 'bg-gold text-navy hover:brightness-110'
                       : 'border border-navy text-navy hover:bg-navy hover:text-cream'
                   }`}
                 >
-                  Get Started
+                  {loadingId === pkg.id ? 'Redirecting…' : pkg.cta}
                 </button>
               </div>
             );

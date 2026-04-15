@@ -18,7 +18,7 @@ export default function HowItWorksPage() {
             OUR PROCESS
           </p>
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-cream font-bold mb-6">
-            The C.O.N.C.I.E.R.G.E. Method™
+            The C.O.N.C.I.E.R.G.E. Method<span className="text-2xl align-super">™</span>
           </h1>
           <p className="text-cream/60 text-lg max-w-2xl mx-auto">
             A proven 9-step operating system that transforms PCS chaos into coordinated calm.

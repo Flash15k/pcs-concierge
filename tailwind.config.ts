@@ -19,6 +19,7 @@ const config: Config = {
         'warm-white': '#FEFDFB',
         charcoal: '#2C2C2C',
         slate: '#5A5A5A',
+        footer: '#0F1A2E',
       },
       fontFamily: {
         heading: ['Playfair Display', 'serif'],

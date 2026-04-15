@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { UserCheck, Building2, Bell } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,15 +39,18 @@ export function SolutionSection() {
 
   const solutions = [
     {
+      icon: <UserCheck size={22} strokeWidth={1.5} />,
       title: 'Dedicated Coordination',
       description: 'One point of contact. One streamlined plan. Every task tracked and executed.'
     },
     {
+      icon: <Building2 size={22} strokeWidth={1.5} />,
       title: 'Vendor Management',
       description:
         'Cleaning, storage, housing \u2014 we coordinate the vendors, you approve the plan.'
     },
     {
+      icon: <Bell size={22} strokeWidth={1.5} />,
       title: 'White-Glove Updates',
       description: 'Proactive communication so you never have to ask what\'s happening with your move?'
     }
@@ -92,8 +96,8 @@ export function SolutionSection() {
         <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {solutions.map((solution, idx) => (
             <div key={idx} className="text-center">
-              <div className="w-12 h-12 border border-gold/30 mx-auto mb-4 flex items-center justify-center text-gold text-xl">
-                \u2726
+              <div className="w-12 h-12 border border-gold/30 mx-auto mb-4 flex items-center justify-center text-gold">
+                {solution.icon}
               </div>
               <h3 className="text-cream font-heading text-xl font-semibold mb-3">
                 {solution.title}

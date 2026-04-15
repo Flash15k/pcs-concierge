@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -82,11 +83,18 @@ You shouldn't have to manage a military-grade operation just to move your family
           </div>
           <div
             ref={rightContentRef}
-            className="aspect-[4/3] bg-navy/5 rounded-none overflow-hidden relative border border-gold/10 flex items-center justify-center"
+            className="aspect-[16/9] rounded-none overflow-hidden relative border border-gold/10"
           >
-            <div className="text-center">
-              <p className="text-navy/40 text-sm font-body">Moving boxes image placeholder</p>
-            </div>
+            <Image
+              src="/images/soldier-family.png"
+              alt="A welcoming military soldier reuniting with their family, representing the support PCS Concierge provides during every move"
+              fill
+              className="object-cover"
+              style={{ objectPosition: 'center 30%' }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              quality={100}
+              priority
+            />
           </div>
         </div>
       </div>

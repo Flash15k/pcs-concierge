@@ -54,7 +54,7 @@ export function ProcessTimeline() {
             OUR PROVEN PROCESS
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-navy font-bold mb-6">
-            The C.O.N.C.I.E.R.G.E. Method\u2122
+            The C.O.N.C.I.E.R.G.E. Method<span className="text-2xl align-super">™</span>
           </h2>
           <p className="text-charcoal/70 text-lg max-w-2xl mx-auto mb-8">
             A 9-step operating system that transforms PCS chaos into coordinated calm.
