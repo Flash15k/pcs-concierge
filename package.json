@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^9.2.0",
+    "@supabase/supabase-js": "^2.103.3",
     "autoprefixer": "^10.4.16",
     "gsap": "^3.12.2",
     "lucide-react": "^0.294.0",

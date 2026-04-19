@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
+import { createClient } from '@supabase/supabase-js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-03-25.dahlia',
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 const PACKAGE_NAMES: Record<string, { name: string; price: string; description: string }> = {
   basic: {
@@ -47,6 +53,31 @@ export async function POST(req: NextRequest) {
     const customerPhone = session.customer_details?.phone || 'Not provided';
     const packageId = session.metadata?.packageId || 'standard';
     const pkg = PACKAGE_NAMES[packageId] ?? PACKAGE_NAMES['standard'];
+
+    // Save client to database
+    const nameParts = customerName.split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    const packageMap: Record<string, string> = {
+      basic: 'essential',
+      standard: 'premier',
+      'white-glove': 'elite',
+    };
+
+    if (customerEmail) {
+      const { error: dbError } = await supabase.from('clients').upsert({
+        email: customerEmail,
+        first_name: firstName,
+        last_name: lastName,
+        phone: customerPhone,
+        package: packageMap[packageId] ?? 'premier',
+        stripe_session_id: session.id,
+        status: 'new',
+      }, { onConflict: 'email' });
+
+      if (dbError) console.error('Supabase insert error:', dbError);
+    }
 
     // Send confirmation email to client
     if (customerEmail) {
