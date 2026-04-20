@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PortalNav from '@/components/portal/PortalNav';
+import AdminPreviewBanner from '@/components/portal/AdminPreviewBanner';
 import { usePortalAuth } from '@/lib/usePortalAuth';
 import { createClient } from '@/lib/supabase-browser';
 
@@ -24,7 +25,7 @@ function timeAgo(date: string) {
 }
 
 export default function PortalUpdates() {
-  const { clientId, loading } = usePortalAuth();
+  const { clientId, clientData, isAdminPreview, loading } = usePortalAuth();
   const [updates, setUpdates] = useState<Update[]>([]);
 
   useEffect(() => {
@@ -43,10 +44,13 @@ export default function PortalUpdates() {
 
   if (loading) return <LoadingScreen />;
 
+  const intake = clientData as Record<string, string> | null;
+
   return (
     <div className="min-h-screen bg-[#F3F6FA] flex">
+      {isAdminPreview && <AdminPreviewBanner clientName={`${intake?.first_name} ${intake?.last_name}`} />}
       <PortalNav />
-      <main className="ml-60 flex-1 p-8">
+      <main className={`ml-60 flex-1 p-8 ${isAdminPreview ? 'pt-16' : ''}`}>
         <div className="mb-8">
           <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-1">From Your Concierge</p>
           <h1 className="font-serif text-3xl text-[#0B2545]">My Updates</h1>

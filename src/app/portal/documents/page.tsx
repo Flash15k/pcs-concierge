@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import PortalNav from '@/components/portal/PortalNav';
+import AdminPreviewBanner from '@/components/portal/AdminPreviewBanner';
 import { usePortalAuth } from '@/lib/usePortalAuth';
 import { createClient } from '@/lib/supabase-browser';
 
@@ -25,7 +26,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default function PortalDocuments() {
-  const { clientId, loading } = usePortalAuth();
+  const { clientId, clientData, isAdminPreview, loading } = usePortalAuth();
   const [documents, setDocuments] = useState<Document[]>([]);
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -77,10 +78,13 @@ export default function PortalDocuments() {
 
   if (loading) return <LoadingScreen />;
 
+  const intake = clientData as Record<string, string> | null;
+
   return (
     <div className="min-h-screen bg-[#F3F6FA] flex">
+      {isAdminPreview && <AdminPreviewBanner clientName={`${intake?.first_name} ${intake?.last_name}`} />}
       <PortalNav />
-      <main className="ml-60 flex-1 p-8">
+      <main className={`ml-60 flex-1 p-8 ${isAdminPreview ? 'pt-16' : ''}`}>
         <div className="flex items-start justify-between mb-8">
           <div>
             <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-1">Your Files</p>

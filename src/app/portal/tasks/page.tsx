@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PortalNav from '@/components/portal/PortalNav';
+import AdminPreviewBanner from '@/components/portal/AdminPreviewBanner';
 import { usePortalAuth } from '@/lib/usePortalAuth';
 import { createClient } from '@/lib/supabase-browser';
 
@@ -28,7 +29,7 @@ const ACTION_LABELS: Record<string, string> = {
 };
 
 export default function PortalTasks() {
-  const { clientId, loading } = usePortalAuth();
+  const { clientId, clientData, isAdminPreview, loading } = usePortalAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -57,10 +58,13 @@ export default function PortalTasks() {
   const pending = tasks.filter(t => !t.completed);
   const done = tasks.filter(t => t.completed);
 
+  const intake = clientData as Record<string, string> | null;
+
   return (
     <div className="min-h-screen bg-[#F3F6FA] flex">
+      {isAdminPreview && <AdminPreviewBanner clientName={`${intake?.first_name} ${intake?.last_name}`} />}
       <PortalNav />
-      <main className="ml-60 flex-1 p-8">
+      <main className={`ml-60 flex-1 p-8 ${isAdminPreview ? 'pt-16' : ''}`}>
         <div className="mb-8">
           <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-1">Action Required</p>
           <h1 className="font-serif text-3xl text-[#0B2545]">My Tasks</h1>

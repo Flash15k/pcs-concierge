@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PortalNav from '@/components/portal/PortalNav';
+import AdminPreviewBanner from '@/components/portal/AdminPreviewBanner';
 import { usePortalAuth } from '@/lib/usePortalAuth';
 import { createClient } from '@/lib/supabase-browser';
 
@@ -21,7 +22,7 @@ const STATUS_STYLES = {
 };
 
 export default function PortalTimeline() {
-  const { clientId, loading } = usePortalAuth();
+  const { clientId, clientData, isAdminPreview, loading } = usePortalAuth();
   const [milestones, setMilestones] = useState<Milestone[]>([]);
 
   useEffect(() => {
@@ -43,10 +44,13 @@ export default function PortalTimeline() {
   const complete = milestones.filter(m => m.status === 'completed').length;
   const progress = milestones.length > 0 ? Math.round((complete / milestones.length) * 100) : 0;
 
+  const intake = clientData as Record<string, string> | null;
+
   return (
     <div className="min-h-screen bg-[#F3F6FA] flex">
+      {isAdminPreview && <AdminPreviewBanner clientName={`${intake?.first_name} ${intake?.last_name}`} />}
       <PortalNav />
-      <main className="ml-60 flex-1 p-8">
+      <main className={`ml-60 flex-1 p-8 ${isAdminPreview ? 'pt-16' : ''}`}>
         <div className="mb-8">
           <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-1">Your Move</p>
           <h1 className="font-serif text-3xl text-[#0B2545]">My PCS Timeline</h1>

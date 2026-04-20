@@ -37,6 +37,15 @@ export default function AdminDashboard() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
+  async function previewPortal(clientId: string) {
+    await fetch('/api/admin/preview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientId }),
+    });
+    window.open('/portal/dashboard', '_blank');
+  }
+
   useEffect(() => {
     fetchClients();
   }, []);
@@ -173,6 +182,7 @@ export default function AdminDashboard() {
                     <th className="text-left px-5 py-3 text-xs uppercase tracking-widest text-[#6A7381] font-semibold">Package</th>
                     <th className="text-left px-5 py-3 text-xs uppercase tracking-widest text-[#6A7381] font-semibold">Status</th>
                     <th className="text-left px-5 py-3 text-xs uppercase tracking-widest text-[#6A7381] font-semibold">Joined</th>
+                    <th className="px-5 py-3"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -194,6 +204,14 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-5 py-4 text-[#6A7381] text-xs">
                         {new Date(client.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="px-5 py-4" onClick={e => e.stopPropagation()}>
+                        <button
+                          onClick={() => previewPortal(client.id)}
+                          className="px-3 py-1 rounded-lg bg-[#0B2545] text-white text-xs font-semibold hover:bg-[#163960] transition-all whitespace-nowrap"
+                        >
+                          Preview Portal
+                        </button>
                       </td>
                     </tr>
                   ))}
