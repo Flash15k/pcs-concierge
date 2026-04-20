@@ -32,8 +32,11 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-[#0B2545] flex items-center justify-center px-5">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-2">United PCS Group</p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/05 mb-4">
+            <span className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold">United PCS Group</span>
+          </div>
           <h1 className="font-serif text-3xl text-white">Admin Portal</h1>
+          <p className="text-white/50 text-sm mt-2">Restricted access</p>
         </div>
         <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-2xl">
           <div className="flex flex-col gap-2 mb-5">

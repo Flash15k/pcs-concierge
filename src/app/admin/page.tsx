@@ -98,8 +98,8 @@ export default function AdminDashboard() {
           <a href="/admin" className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/10 text-white text-sm font-semibold">
             <span>📋</span> Clients
           </a>
-          <a href="/intake" className="flex items-center gap-3 px-3 py-2 rounded-xl text-white/60 hover:bg-white/06 text-sm transition-all">
-            <span>📝</span> Intake Form
+          <a href="/admin/intake" className="flex items-center gap-3 px-3 py-2 rounded-xl text-white/60 hover:bg-white/10 text-sm transition-all">
+            <span>📝</span> Intake Queue
           </a>
         </nav>
         <div className="p-4 border-t border-white/10">
