@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 type FormData = {
   clientName: string;
@@ -107,6 +107,7 @@ export default function IntakePage() {
     setSubmitting(true);
     setError('');
 
+    const supabase = getSupabase();
     const nameParts = form.clientName.trim().split(' ');
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ') || '';
