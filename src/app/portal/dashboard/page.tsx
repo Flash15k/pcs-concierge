@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PortalNav from '@/components/portal/PortalNav';
+import AdminPreviewBanner from '@/components/portal/AdminPreviewBanner';
 import { usePortalAuth } from '@/lib/usePortalAuth';
 import { createClient } from '@/lib/supabase-browser';
 
@@ -12,7 +13,7 @@ const PACKAGE_LABELS: Record<string, string> = {
 };
 
 export default function PortalDashboard() {
-  const { clientId, clientData, loading } = usePortalAuth();
+  const { clientId, clientData, isAdminPreview, loading } = usePortalAuth();
   const [nextMilestone, setNextMilestone] = useState<{ title: string; due_label: string } | null>(null);
   const [recentUpdates, setRecentUpdates] = useState<{ title: string; body: string; created_at: string }[]>([]);
   const [pendingTasks, setPendingTasks] = useState<{ title: string; priority: string }[]>([]);
@@ -51,8 +52,9 @@ export default function PortalDashboard() {
 
   return (
     <div className="min-h-screen bg-[#F3F6FA] flex">
+      {isAdminPreview && <AdminPreviewBanner clientName={`${intake?.first_name} ${intake?.last_name}`} />}
       <PortalNav />
-      <main className="ml-60 flex-1 p-8">
+      <main className={`ml-60 flex-1 p-8 ${isAdminPreview ? 'pt-16' : ''}`}>
         {/* Header */}
         <div className="mb-8">
           <p className="text-[#C6A65A] text-xs tracking-widest uppercase font-semibold mb-1">Welcome back</p>
