@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSupabase } from '@/lib/supabase';
 
 type Client = {
   id: string;
@@ -51,25 +50,27 @@ export default function AdminDashboard() {
   }, []);
 
   async function fetchClients() {
-    const supabase = getSupabase();
-    const { data, error } = await supabase
-      .from('clients')
-      .select('*, intake_responses(responses, submitted_at)')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error(error);
+    const res = await fetch('/api/admin/clients');
+    if (res.status === 401) {
       router.push('/admin/login');
       return;
     }
-    setClients(data || []);
+    const { clients, error } = await res.json();
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setClients(clients || []);
     setLoading(false);
   }
 
   async function updateStatus(clientId: string, newStatus: string) {
     setUpdatingStatus(true);
-    const supabase = getSupabase();
-    await supabase.from('clients').update({ status: newStatus }).eq('id', clientId);
+    await fetch('/api/admin/clients', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientId, status: newStatus }),
+    });
     setClients(prev => prev.map(c => c.id === clientId ? { ...c, status: newStatus } : c));
     if (selected?.id === clientId) setSelected(prev => prev ? { ...prev, status: newStatus } : prev);
     setUpdatingStatus(false);
