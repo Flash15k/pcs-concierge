@@ -3,16 +3,15 @@ import Stripe from 'stripe';
 import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-03-25.dahlia',
-});
-
-const resend = new Resend(process.env.RESEND_API_KEY!);
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-03-25.dahlia' });
+}
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY!);
+}
+function getSupabase() {
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+}
 
 const PACKAGE_NAMES: Record<string, { name: string; price: string; description: string }> = {
   basic: {
@@ -33,6 +32,10 @@ const PACKAGE_NAMES: Record<string, { name: string; price: string; description: 
 };
 
 export async function POST(req: NextRequest) {
+  const stripe = getStripe();
+  const resend = getResend();
+  const supabase = getSupabase();
+
   const body = await req.text();
   const sig = req.headers.get('stripe-signature')!;
 
