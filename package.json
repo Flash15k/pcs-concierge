@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "PCS Concierge by United PCS Group LLC - Luxury Military Relocation Service",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
