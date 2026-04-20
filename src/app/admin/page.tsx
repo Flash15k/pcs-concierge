@@ -55,12 +55,11 @@ export default function AdminDashboard() {
       router.push('/admin/login');
       return;
     }
-    const { clients, error } = await res.json();
-    if (error) {
-      console.error(error);
-      return;
+    const json = await res.json();
+    if (json.error) {
+      console.error('Admin fetch error:', json.error);
     }
-    setClients(clients || []);
+    setClients(json.clients || []);
     setLoading(false);
   }
 
