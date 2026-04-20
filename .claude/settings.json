@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push *)",
+      "Bash(git commit -m 'fix: pin Node.js to 20.x for Vercel compatibility *)",
+      "Bash(git commit -m 'fix: add vercel.json with Node 20.x *)",
+      "Bash(git commit -m 'fix: initialize Stripe/Resend/Supabase inside handler to fix build error *)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

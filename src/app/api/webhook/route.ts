@@ -12,6 +12,9 @@ function getResend() {
 function getSupabase() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 }
+function getSupabaseAdmin() {
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+}
 
 const PACKAGE_NAMES: Record<string, { name: string; price: string; description: string }> = {
   basic: {
@@ -69,6 +72,14 @@ export async function POST(req: NextRequest) {
     };
 
     if (customerEmail) {
+      const supabaseAdmin = getSupabaseAdmin();
+
+      // Invite user to client portal (sends set-password email)
+      const { data: authUser } = await supabaseAdmin.auth.admin.inviteUserByEmail(customerEmail, {
+        redirectTo: 'https://upcsg.com/portal/dashboard',
+        data: { first_name: firstName, last_name: lastName },
+      });
+
       const { error: dbError } = await supabase.from('clients').upsert({
         email: customerEmail,
         first_name: firstName,
@@ -77,6 +88,7 @@ export async function POST(req: NextRequest) {
         package: packageMap[packageId] ?? 'premier',
         stripe_session_id: session.id,
         status: 'new',
+        user_id: authUser?.user?.id ?? null,
       }, { onConflict: 'email' });
 
       if (dbError) console.error('Supabase insert error:', dbError);
