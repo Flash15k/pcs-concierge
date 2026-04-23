@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCS Concierge — Sisterhood Flyer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      gap: 20px;
+    }
+
+    /* ── Download button ── */
+    .download-btn {
+      background: linear-gradient(135deg, #C6A65A 0%, #e0c070 50%, #C6A65A 100%);
+      color: #0B2545;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(198,166,90,0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(198,166,90,0.55);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    @media print, .generating-pdf {
+      .download-btn { display: none !important; }
+      body { background: transparent; padding: 0; }
+    }
+
+    /* ── Flyer Canvas — 1080x1350 ratio (Instagram portrait) ── */
+    .flyer {
+      width: 540px;
+      height: 675px;
+      position: relative;
+      background: #0B2545;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* ── Background texture layers ── */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(198,166,90,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(198,166,90,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: 0;
+    }
+
+    .bg-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(198,166,90,0.12) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .bg-radial-bottom {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 40% at 50% 100%, rgba(79,93,47,0.25) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    /* ── Gold diagonal accent ── */
+    .diagonal-accent {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border: 1.5px solid rgba(198,166,90,0.25);
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+
+    .diagonal-accent-2 {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(198,166,90,0.15);
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+
+    .diagonal-accent-bl {
+      position: absolute;
+      bottom: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      border: 1.5px solid rgba(198,166,90,0.12);
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+
+    /* ── Top/bottom gold bars ── */
+    .top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #C6A65A 30%, #C6A65A 70%, transparent);
+      z-index: 10;
+    }
+
+    .bottom-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #C6A65A 30%, #C6A65A 70%, transparent);
+      z-index: 10;
+    }
+
+    /* ── Side accent lines ── */
+    .left-line {
+      position: absolute;
+      left: 22px; top: 60px; bottom: 60px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(198,166,90,0.4) 20%, rgba(198,166,90,0.4) 80%, transparent);
+      z-index: 2;
+    }
+
+    .right-line {
+      position: absolute;
+      right: 22px; top: 60px; bottom: 60px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(198,166,90,0.4) 20%, rgba(198,166,90,0.4) 80%, transparent);
+      z-index: 2;
+    }
+
+    /* ── Content wrapper ── */
+    .content {
+      position: relative;
+      z-index: 5;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 50px 28px;
+    }
+
+    /* ── Logo area ── */
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .compass-svg {
+      width: 64px;
+      height: 64px;
+      filter: drop-shadow(0 0 12px rgba(198,166,90,0.4));
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      color: #C6A65A;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── Gold divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin: 14px 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C6A65A);
+    }
+
+    .divider-line.right {
+      background: linear-gradient(90deg, #C6A65A, transparent);
+    }
+
+    .divider-diamond {
+      width: 6px;
+      height: 6px;
+      background: #C6A65A;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── Hero headline ── */
+    .hero-headline {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .hero-headline .eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      color: #C6A65A;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .hero-headline h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .hero-headline h2 em {
+      font-style: italic;
+      color: #C6A65A;
+    }
+
+    .hero-sub {
+      font-size: 10.5px;
+      font-weight: 400;
+      color: #a8bdd4;
+      text-align: center;
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    /* ── Services grid ── */
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      margin: 14px 0;
+    }
+
+    .service-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(198,166,90,0.2);
+      border-radius: 5px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-dot {
+      width: 6px;
+      height: 6px;
+      background: #C6A65A;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .service-item span {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: #cdd8e8;
+      line-height: 1.3;
+    }
+
+    /* ── Referral banner ── */
+    .referral-banner {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(198,166,90,0.15) 0%, rgba(198,166,90,0.08) 100%);
+      border: 1px solid rgba(198,166,90,0.45);
+      border-radius: 6px;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 10px 0;
+    }
+
+    .referral-icon {
+      width: 36px;
+      height: 36px;
+      background: #C6A65A;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .referral-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #0B2545;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .referral-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #C6A65A;
+      margin-bottom: 3px;
+    }
+
+    .referral-text p {
+      font-size: 9.5px;
+      color: #a8bdd4;
+      line-height: 1.45;
+    }
+
+    .referral-text p strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      width: 100%;
+      text-align: center;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .cta-block .cta-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #C6A65A;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .cta-block .cta-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cta-block .cta-contact span {
+      font-size: 10px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .cta-block .cta-contact .sep {
+      color: #C6A65A;
+      font-size: 10px;
+    }
+
+    .tagline-final {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 10px;
+      color: rgba(198,166,90,0.7);
+      text-align: center;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="download-btn" onclick="downloadPDF()">⬇ Download PDF</button>
+
+  <div class="flyer" id="flyer">
+    <!-- Background layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-radial"></div>
+    <div class="bg-radial-bottom"></div>
+
+    <!-- Decorative geometry -->
+    <div class="diagonal-accent"></div>
+    <div class="diagonal-accent-2"></div>
+    <div class="diagonal-accent-bl"></div>
+    <div class="top-bar"></div>
+    <div class="bottom-bar"></div>
+    <div class="left-line"></div>
+    <div class="right-line"></div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Logo -->
+      <div class="logo-area">
+        <svg class="compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 5 L90 20 L90 55 C90 75 70 92 50 98 C30 92 10 75 10 55 L10 20 Z"
+                fill="#1a3d6e" stroke="#C6A65A" stroke-width="2.5"/>
+          <path d="M50 14 L82 26 L82 55 C82 71 65 86 50 91 C35 86 18 71 18 55 L18 26 Z"
+                fill="none" stroke="#C6A65A" stroke-width="1" opacity="0.4"/>
+          <g fill="#C6A65A">
+            <polygon points="50,22 53,38 50,35 47,38"/>
+            <polygon points="50,78 53,62 50,65 47,62"/>
+            <polygon points="78,50 62,47 65,50 62,53"/>
+            <polygon points="22,50 38,47 35,50 38,53"/>
+            <polygon points="71,29 59,43 62,40 65,43"/>
+            <polygon points="29,71 41,57 38,60 35,57"/>
+            <polygon points="29,29 43,41 40,38 37,41"/>
+            <polygon points="71,71 57,59 60,62 63,59"/>
+          </g>
+          <circle cx="50" cy="50" r="6" fill="#C6A65A"/>
+          <circle cx="50" cy="50" r="3.5" fill="#0B2545"/>
+          <text x="50" y="20" text-anchor="middle" fill="#ffffff" font-size="7"
+                font-family="Montserrat,sans-serif" font-weight="700">N</text>
+        </svg>
+        <div class="brand-name">PCS Concierge</div>
+        <div class="brand-sub">by United PCS Group</div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-diamond"></div>
+        <div class="divider-line right"></div>
+      </div>
+
+      <!-- Headline -->
+      <div class="hero-headline">
+        <div class="eyebrow">For Military Families</div>
+        <h2>Your PCS Move —<br/><em>Completely Handled.</em></h2>
+        <p class="hero-sub">
+          We coordinate every detail of your Permanent Change of Station move
+          so your family can focus on each other — not the chaos.
+        </p>
+      </div>
+
+      <!-- Services -->
+      <div class="services">
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Utility Setup &amp; Cancellation</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Housing Search Coordination</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Cleaning Crew Scheduling</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Move-Out Inspection Prep</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Vendor Coordination</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot"></div>
+          <span>Arrival Day Essentials</span>
+        </div>
+      </div>
+
+      <!-- Referral Banner -->
+      <div class="referral-banner">
+        <div class="referral-icon">
+          <!-- gift / share icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+            <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
+          </svg>
+        </div>
+        <div class="referral-text">
+          <h4>Know a Family That Needs This?</h4>
+          <p>Refer them to PCS Concierge and receive a
+            <strong>$100 thank-you gift</strong> when they book a package.
+            Our way of saying thank you for looking out for your sisters.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <div class="cta-label">Get Started or Learn More</div>
+        <div class="cta-contact">
+          <span>info@UPCSG.com</span>
+          <span class="sep">·</span>
+          <span>(910) 412-6900</span>
+          <span class="sep">·</span>
+          <span>www.UPCSG.com</span>
+        </div>
+        <div class="tagline-final">"Your PCS Move, Professionally Coordinated."</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function downloadPDF() {
+      const flyer = document.getElementById('flyer');
+      const btn   = document.querySelector('.download-btn');
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+
+      const opt = {
+        margin:      0,
+        filename:    'PCS-Concierge-Sisterhood-Flyer.pdf',
+        image:       { type: 'jpeg', quality: 1 },
+        html2canvas: {
+          scale:          3,
+          useCORS:        true,
+          backgroundColor: '#0B2545',
+          width:           540,
+          height:          675,
+          logging:         false,
+        },
+        jsPDF: {
+          unit:        'px',
+          format:      [540, 675],
+          orientation: 'portrait',
+          hotfixes:    ['px_scaling'],
+        },
+      };
+
+      html2pdf().set(opt).from(flyer).save().then(() => {
+        btn.disabled    = false;
+        btn.textContent = '⬇ Download PDF';
+      });
+    }
+  </script>
+
+</body>
+</html>
