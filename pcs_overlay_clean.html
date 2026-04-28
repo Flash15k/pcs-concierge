@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCS Concierge — Video Overlay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=Montserrat:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+    }
+
+    .logo-img {
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 260px;
+    }
+
+    .div-line-l {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C6A65A);
+    }
+
+    .div-line-r {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #C6A65A, transparent);
+    }
+
+    .div-diamond {
+      width: 6px;
+      height: 6px;
+      background: #C6A65A;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #C6A65A;
+      text-align: center;
+      letter-spacing: 0.4px;
+      text-shadow:
+        0 1px 8px rgba(0,0,0,0.95),
+        0 0 20px rgba(0,0,0,0.8);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <img class="logo-img"
+         src="/PCS_CONCIERGE5555.png"
+         alt="PCS Concierge Shield"/>
+    <div class="divider">
+      <div class="div-line-l"></div>
+      <div class="div-diamond"></div>
+      <div class="div-line-r"></div>
+    </div>
+    <div class="tagline">"Your Move, Professionally Coordinated."</div>
+  </div>
+</body>
+</html>
