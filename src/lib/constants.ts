@@ -5,8 +5,8 @@ export const COMPANY = {
   tagline: 'Your PCS Move, Professionally Coordinated.',
   domain: 'https://upcsg.com',
   email: 'info@UPCSG.com',
-  phone: '(704) 649-2609',
-  phoneTel: '+17046492609',
+  phone: '(910) 412-6900',
+  phoneTel: '+19104126900',
   hours: {
     weekday: 'Monday – Friday: 9:00 AM – 6:00 PM',
     saturday: 'Saturday: 10:00 AM – 2:00 PM',

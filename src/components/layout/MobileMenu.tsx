@@ -98,8 +98,8 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
         <div className="border-t border-gold/20 px-6 py-8 text-center">
           <div className="flex items-center justify-center gap-2 text-cream text-sm mb-4">
             <Phone size={16} />
-            <a href="tel:(704)649-2609" className="hover:text-gold transition-colors">
-              (704) 649-2609
+            <a href="tel:(910)412-6900" className="hover:text-gold transition-colors">
+              (910) 412-6900
             </a>
           </div>
           <div className="flex items-center justify-center gap-2 text-cream text-sm">

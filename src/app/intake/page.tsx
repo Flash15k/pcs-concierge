@@ -125,7 +125,7 @@ export default function IntakePage() {
     });
 
     if (dbError) {
-      setError('Something went wrong. Please try again or call us at (704) 649-2609.');
+      setError('Something went wrong. Please try again or call us at (910) 412-6900.');
       setSubmitting(false);
       return;
     }
@@ -149,7 +149,7 @@ export default function IntakePage() {
             Your concierge intake has been submitted. A member of the United PCS Group team will reach out within 10 minutes to begin your personalized relocation plan.
           </p>
           <p className="text-sm text-[#6A7381]">
-            Questions? Call or text <strong className="text-[#0B2545]">(704) 649-2609</strong> or email{' '}
+            Questions? Call or text <strong className="text-[#0B2545]">(910) 412-6900</strong> or email{' '}
             <a href="mailto:info@upcsg.com" className="text-[#C6A65A]">info@upcsg.com</a>
           </p>
         </div>

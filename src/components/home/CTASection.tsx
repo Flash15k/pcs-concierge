@@ -89,7 +89,7 @@ export function CTASection() {
 
         {/* Contact Info */}
         <p className="text-cream/40 text-sm mt-6">
-          (704) 649-2609 | info@UPCSG.com
+          (910) 412-6900 | info@UPCSG.com
         </p>
       </div>
 

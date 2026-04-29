@@ -177,7 +177,7 @@ function clientConfirmationEmail(
 
             <div style="width:40px;height:1px;background:#C9A84C;margin:32px 0;"></div>
             <p style="color:#5a6a7a;font-size:14px;line-height:1.7;margin:0;font-family:Arial,sans-serif;">
-              Questions before we reach out? Call or text us at <strong style="color:#0F1A2E;">(704) 649-2609</strong> or reply to this email at <a href="mailto:info@UPCSG.com" style="color:#C9A84C;">info@UPCSG.com</a>.
+              Questions before we reach out? Call or text us at <strong style="color:#0F1A2E;">(910) 412-6900</strong> or reply to this email at <a href="mailto:info@UPCSG.com" style="color:#C9A84C;">info@UPCSG.com</a>.
             </p>
           </td>
         </tr>
@@ -187,7 +187,7 @@ function clientConfirmationEmail(
           <td style="background:#0F1A2E;padding:32px 40px;text-align:center;">
             <p style="color:rgba(245,240,232,0.5);font-size:12px;margin:0;font-family:Arial,sans-serif;line-height:1.6;">
               PCS Concierge by United PCS Group LLC<br>
-              <a href="https://upcsg.com" style="color:#C9A84C;text-decoration:none;">upcsg.com</a> &nbsp;|&nbsp; (704) 649-2609 &nbsp;|&nbsp; info@UPCSG.com
+              <a href="https://upcsg.com" style="color:#C9A84C;text-decoration:none;">upcsg.com</a> &nbsp;|&nbsp; (910) 412-6900 &nbsp;|&nbsp; info@UPCSG.com
             </p>
           </td>
         </tr>

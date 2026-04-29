@@ -25,11 +25,11 @@ export function ServiceTiers() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert('Something went wrong. Please try again or call us at (704) 649-2609.');
+        alert('Something went wrong. Please try again or call us at (910) 412-6900.');
         setLoadingId(null);
       }
     } catch {
-      alert('Something went wrong. Please try again or call us at (704) 649-2609.');
+      alert('Something went wrong. Please try again or call us at (910) 412-6900.');
       setLoadingId(null);
     }
   }

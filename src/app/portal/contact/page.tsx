@@ -28,7 +28,7 @@ export default function PortalContact() {
     });
 
     if (dbError) {
-      setError('Something went wrong. Please call us directly at (704) 649-2609.');
+      setError('Something went wrong. Please call us directly at (910) 412-6900.');
       setSending(false);
       return;
     }
@@ -72,8 +72,8 @@ export default function PortalContact() {
               </div>
             </div>
             <div className="flex flex-col gap-3 mt-6">
-              <a href="tel:7046492609" className="w-full text-center py-3 rounded-xl border border-[#C6A65A] text-[#C6A65A] font-semibold text-sm hover:bg-[#C6A65A] hover:text-white transition-all">
-                📞 Call (704) 649-2609
+              <a href="tel:9104126900" className="w-full text-center py-3 rounded-xl border border-[#C6A65A] text-[#C6A65A] font-semibold text-sm hover:bg-[#C6A65A] hover:text-white transition-all">
+                📞 Call (910) 412-6900
               </a>
               <a href="mailto:info@upcsg.com" className="w-full text-center py-3 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-all">
                 ✉️ info@upcsg.com
@@ -136,7 +136,7 @@ export default function PortalContact() {
 
         <div className="mt-6 max-w-4xl p-5 rounded-2xl bg-red-50 border border-red-200">
           <p className="text-sm font-semibold text-red-800 mb-1">Move-Week Emergency?</p>
-          <p className="text-sm text-red-700">For urgent move-day issues, call us directly at <strong>(704) 649-2609</strong>. We prioritize all move-week calls.</p>
+          <p className="text-sm text-red-700">For urgent move-day issues, call us directly at <strong>(910) 412-6900</strong>. We prioritize all move-week calls.</p>
         </div>
       </main>
     </div>
