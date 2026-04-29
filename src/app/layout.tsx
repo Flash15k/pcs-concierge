@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Playfair_Display, Montserrat } from 'next/font/google';
 import '@/styles/globals.css';
 import SiteShell from '@/components/layout/SiteShell';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -64,6 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="font-body bg-cream text-charcoal antialiased">
         <SiteShell>{children}</SiteShell>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
